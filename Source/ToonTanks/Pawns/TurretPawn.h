@@ -18,5 +18,11 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	float FireRate = 2.f;
+
+	void CheckFireCondition();
+
+	FTimerHandle FireRateTimer;
+
 };
