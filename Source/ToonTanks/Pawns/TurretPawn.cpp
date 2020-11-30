@@ -16,5 +16,7 @@ void ATurretPawn::Tick(float DeltaTime)
 
 void ATurretPawn::CheckFireCondition() 
 {
-    
+    // If player == null || is dead then CHECK
+
+    // If player is in range then FIRE
 }
