@@ -15,6 +15,8 @@ ATankPawn::ATankPawn()
 void ATankPawn::BeginPlay()
 {
     Super::BeginPlay();
+
+    PlayerControllerRef = Cast<APlayerController>(GetController());
 }
 
 // Called every frame
@@ -24,6 +26,15 @@ void ATankPawn::Tick(float DeltaTime)
 
     Rotate();
     Move();
+
+    if(PlayerControllerRef)
+    {
+        FHitResult TraceHit;
+        PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility, false, TraceHit);
+        FVector HitLocation = TraceHitResult.ImpactPoint;
+
+        RotateTurret(HitLocation);
+    }
 }
 
 // Called to bind functionality to input
@@ -32,7 +43,7 @@ void ATankPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
     Super::SetupPlayerInputComponent(PlayerInputComponent);
     PlayerInputComponent->BindAxis("MoveForward", this, &ATankPawn::CalculateMoveInput);
     PlayerInputComponent->BindAxis("Turn", this, &ATankPawn::CalculateRotateInput);
-    PlayerInputComponent->Bindaction();
+    PlayerInputComponent->Bindaction("Fire", IE_Pressed, this, &ATankPawn::Fire);
 }
 
 void ATankPawn::CalculateMoveInput(float Value)
