@@ -26,6 +26,8 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 	FVector LookAtTargetClean = FVector(LookAtTarget.X, LookAtTarget.Y, TurretMesh->GetComponentLocation().Z);
 	FVector StartLocation = TurretMesh->GetComponentLocation();
 
+
+	// TODO - Slerp
 	FRotator TurretRoatation = FVector(LookAtTargetClean - StartLocation).Rotation();
 	TurretMesh->SetWorldRotation(TurretRoatation);
 }
