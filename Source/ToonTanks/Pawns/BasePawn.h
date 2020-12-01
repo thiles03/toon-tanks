@@ -5,6 +5,7 @@
 #include "BasePawn.generated.h"
 
 class UCapsuleComponent;
+class UStaticMeshComponent;
 
 UCLASS()
 class TOONTANKS_API ABasePawn : public APawn
@@ -16,7 +17,9 @@ public:
 	ABasePawn();
 
 protected:
-	void 
+	void RotateTurret(FVector LookAtTarget);
+	void Fire();
+	virtual void Destroy();
 
 private:
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))

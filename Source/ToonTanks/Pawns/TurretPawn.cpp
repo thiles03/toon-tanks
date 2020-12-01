@@ -5,6 +5,10 @@
 void ATurretPawn::BeginPlay()
 {
     Super::BeginPlay();
+
+    GetWorldTimerManager().SetTimer(FireRateTimer, this, &ATurretPawn::CheckFireCondition, FireRate, true);
+
+    PlayerPawn = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
 }
 
 // Called every frame
@@ -12,9 +16,12 @@ void ATurretPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    GetWorldTimerManager().SetTimer(FireRateTimer, this, &ATurretPawn::CheckFireCondition, FireRate, true);
+    if(!PlayerPawn || GetDistanceToPlayer() > FireRange)
+    {
+        return;
+    }
 
-    PlayerPawn = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+    Super::RotateTurret(PlayerPawn->GetActorLocation());
 }
 
 void ATurretPawn::CheckFireCondition()
@@ -25,9 +32,9 @@ void ATurretPawn::CheckFireCondition()
         return;
     }
     // If player is in range then FIRE
-    if(GetDistanceToPlayer() <= FireRange)
+    if (GetDistanceToPlayer() <= FireRange)
     {
-
+        Fire();
     }
 }
 
