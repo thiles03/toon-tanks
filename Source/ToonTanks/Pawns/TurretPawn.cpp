@@ -47,3 +47,10 @@ float ATurretPawn::GetDistanceToPlayer()
 
     return FVector::Dist(PlayerPawn->GetActorLocation(), GetActorLocation());
 }
+
+void ATurretPawn::HandleDestruction() 
+{
+    // Call base pawn class to play effects
+    Super::HandleDestruction();
+    Destroy();
+}

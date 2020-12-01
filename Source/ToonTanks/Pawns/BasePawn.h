@@ -19,7 +19,7 @@ public:
 protected:
 	void RotateTurret(FVector LookAtTarget);
 	void Fire();
-	virtual void Destroy();
+	virtual void HandleDestruction();
 
 private:
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))

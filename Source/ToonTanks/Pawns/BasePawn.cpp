@@ -39,7 +39,7 @@ void ABasePawn::Fire()
 	UE_LOG(LogTemp, Warning, TEXT("Fire"));
 }
 
-void ABasePawn::Destroy()
+void ABasePawn::HandleDestruction()
 {
 	// Play death effect, sound and camera shake
 }

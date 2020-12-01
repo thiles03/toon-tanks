@@ -32,27 +32,33 @@ void ATankPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
     Super::SetupPlayerInputComponent(PlayerInputComponent);
     PlayerInputComponent->BindAxis("MoveForward", this, &ATankPawn::CalculateMoveInput);
     PlayerInputComponent->BindAxis("Turn", this, &ATankPawn::CalculateRotateInput);
+    PlayerInputComponent->Bindaction();
 }
 
-void ATankPawn::CalculateMoveInput(float Value) 
+void ATankPawn::CalculateMoveInput(float Value)
 {
     MoveDirection = FVector(Value * MoveSpeed * GetWorld()->DeltaTimeSeconds, 0, 0);
 }
 
-void ATankPawn::CalculateRotateInput(float Value) 
+void ATankPawn::CalculateRotateInput(float Value)
 {
     float RotateAmount = Value * RotateSpeed * GetWorld()->DeltaTimeSeconds;
     FRotator Rotation = FRotator(0, RotateAmount, 0);
     RotationDirection = FQuat(Rotation);
 }
 
-void ATankPawn::Move() 
+void ATankPawn::Move()
 {
     AddActorLocalOffset(MoveDirection, true);
 }
 
-void ATankPawn::Rotate() 
+void ATankPawn::Rotate()
 {
     AddActorLocalRotation(RotationDirection, true);
 }
 
+void ATankPawn::HandleDestruction()
+{
+    Super::HandleDestruction();
+    //Hide player
+}
