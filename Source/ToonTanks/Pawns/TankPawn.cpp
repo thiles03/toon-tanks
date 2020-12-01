@@ -31,7 +31,7 @@ void ATankPawn::Tick(float DeltaTime)
     {
         FHitResult TraceHit;
         PlayerControllerRef->GetHitResultUnderCursor(ECC_Visibility, false, TraceHit);
-        FVector HitLocation = TraceHitResult.ImpactPoint;
+        FVector HitLocation = TraceHit.ImpactPoint;
 
         RotateTurret(HitLocation);
     }
@@ -43,7 +43,7 @@ void ATankPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
     Super::SetupPlayerInputComponent(PlayerInputComponent);
     PlayerInputComponent->BindAxis("MoveForward", this, &ATankPawn::CalculateMoveInput);
     PlayerInputComponent->BindAxis("Turn", this, &ATankPawn::CalculateRotateInput);
-    PlayerInputComponent->Bindaction("Fire", IE_Pressed, this, &ATankPawn::Fire);
+    PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ATankPawn::Fire);
 }
 
 void ATankPawn::CalculateMoveInput(float Value)
