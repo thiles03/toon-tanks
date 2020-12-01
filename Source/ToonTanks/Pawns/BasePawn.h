@@ -5,7 +5,6 @@
 #include "BasePawn.generated.h"
 
 class UCapsuleComponent;
-class UStaticMeshComponent;
 
 UCLASS()
 class TOONTANKS_API ABasePawn : public APawn

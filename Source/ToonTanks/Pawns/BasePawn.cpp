@@ -36,7 +36,7 @@ void ABasePawn::Fire()
 
 	// Spawn projectile at location firing towards rotation
 
-	UE_LOG(LogTemp, Warning, TEXT("Fire"));
+	UE_LOG(LogTemp, Warning, TEXT("Fire called"));
 }
 
 void ABasePawn::HandleDestruction()

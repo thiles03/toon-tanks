@@ -50,7 +50,7 @@ float ATurretPawn::GetDistanceToPlayer()
 
 void ATurretPawn::HandleDestruction() 
 {
-    // Call base pawn class to play effects
+    // Call base class to play effects
     Super::HandleDestruction();
     Destroy();
 }
