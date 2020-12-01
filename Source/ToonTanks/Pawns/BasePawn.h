@@ -15,6 +15,9 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
+protected:
+	void 
+
 private:
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UCapsuleComponent *CapsuleComponent = nullptr;
