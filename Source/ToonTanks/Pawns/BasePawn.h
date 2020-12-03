@@ -5,6 +5,7 @@
 #include "BasePawn.generated.h"
 
 class UCapsuleComponent;
+class AProjectileBase;
 
 UCLASS()
 class TOONTANKS_API ABasePawn : public APawn
@@ -21,6 +22,7 @@ protected:
 	virtual void HandleDestruction();
 
 private:
+	//COMPONENTS
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UCapsuleComponent *CapsuleComponent = nullptr;
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -29,4 +31,7 @@ private:
 	UStaticMeshComponent *TurretMesh = nullptr;
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent *ProjectileSpawnPoint = nullptr;
+	//VARIABLES
+	UPROPERTY(EditAnywhere, BluePrintReadOnly, Category = "Projectile Type", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AProjectileBase> ProjectileClass;
 };

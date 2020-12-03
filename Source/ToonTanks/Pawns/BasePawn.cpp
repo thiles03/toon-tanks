@@ -1,5 +1,6 @@
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
+#include "ToonTanks/Actors/ProjectileBase.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -26,7 +27,6 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 	FVector LookAtTargetClean = FVector(LookAtTarget.X, LookAtTarget.Y, TurretMesh->GetComponentLocation().Z);
 	FVector StartLocation = TurretMesh->GetComponentLocation();
 
-
 	// TODO - Slerp
 	FRotator TurretRoatation = FVector(LookAtTargetClean - StartLocation).Rotation();
 	TurretMesh->SetWorldRotation(TurretRoatation);
@@ -34,11 +34,16 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 
 void ABasePawn::Fire()
 {
-	// Get ProjectileSpawnPoint location && rotation
+	if (ProjectileClass)
+	{
+		// Get ProjectileSpawnPoint location && rotation
+		FVector SpawnLocation = ProjectileSpawnPoint->GetComponentLocation();
+		FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
 
-	// Spawn projectile at location firing towards rotation
-
-	UE_LOG(LogTemp, Warning, TEXT("Fire called"));
+		// Spawn projectile at location firing towards rotation
+		AProjectileBase *TempProjectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, SpawnLocation, SpawnRotation);
+		TempProjectile->SetOwner(this);
+	}
 }
 
 void ABasePawn::HandleDestruction()
