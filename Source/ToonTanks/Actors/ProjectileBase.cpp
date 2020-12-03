@@ -38,4 +38,8 @@ void AProjectileBase::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UP
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwner->GetInstigatorController(), this, DamageType);
 	}
+
+	// TODO - play effects
+
+	Destroy();
 }
