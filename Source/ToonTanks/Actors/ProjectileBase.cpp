@@ -31,7 +31,6 @@ void AProjectileBase::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UP
 	// If reference isn't valid, return
 	if (!MyOwner)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("fail"));
 		return;
 	}
 	// If other actor is not self or owner && it exists, apply damage
@@ -41,6 +40,5 @@ void AProjectileBase::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UP
 	}
 
 	// TODO - play effects
-	UE_LOG(LogTemp, Warning, TEXT("Destroy"));
 	Destroy();
 }
