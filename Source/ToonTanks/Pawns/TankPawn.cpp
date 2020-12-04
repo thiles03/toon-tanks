@@ -71,5 +71,14 @@ void ATankPawn::Rotate()
 void ATankPawn::HandleDestruction()
 {
     Super::HandleDestruction();
-    //Hide player
+    
+    bIsPlayerAlive = false;
+
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+}
+
+bool ATankPawn::GetIsPlayerAlive() 
+{
+    return bIsPlayerAlive;
 }

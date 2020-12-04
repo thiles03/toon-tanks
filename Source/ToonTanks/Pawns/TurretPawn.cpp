@@ -5,7 +5,8 @@
 void ATurretPawn::BeginPlay()
 {
     Super::BeginPlay();
-
+    
+    // Begin checking the fire condition on a looped timer
     GetWorldTimerManager().SetTimer(FireRateTimer, this, &ATurretPawn::CheckFireCondition, FireRate, true);
 
     PlayerPawn = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
@@ -16,7 +17,7 @@ void ATurretPawn::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if(!PlayerPawn || GetDistanceToPlayer() > FireRange)
+    if (!PlayerPawn || GetDistanceToPlayer() > FireRange)
     {
         return;
     }
@@ -26,8 +27,8 @@ void ATurretPawn::Tick(float DeltaTime)
 
 void ATurretPawn::CheckFireCondition()
 {
-    // If player == null || is dead then CHECK
-    if (!PlayerPawn)
+    // If player == null || is dead then CHECK FIRE
+    if (!PlayerPawn || !PlayerPawn->GetIsPlayerAlive())
     {
         return;
     }
@@ -48,9 +49,10 @@ float ATurretPawn::GetDistanceToPlayer()
     return FVector::Dist(PlayerPawn->GetActorLocation(), GetActorLocation());
 }
 
-void ATurretPawn::HandleDestruction() 
+void ATurretPawn::HandleDestruction()
 {
     // Call base class to play effects
     Super::HandleDestruction();
+    
     Destroy();
 }
