@@ -47,6 +47,8 @@ private:
 
 	APlayerController *PlayerControllerRef;
 
+	bool bIsPlayerAlive = true;
+
 	void CalculateMoveInput(float Value);
 
 	void CalculateRotateInput(float Value);

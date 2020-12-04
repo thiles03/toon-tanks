@@ -6,7 +6,7 @@
 
 class ATurretPawn;
 class ATankPawn;
-class APlayerControllerBase
+class APlayerControllerBase;
 
 UCLASS() class TOONTANKS_API ATankGameModeBase : public AGameModeBase
 {
