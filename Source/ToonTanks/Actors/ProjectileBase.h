@@ -38,6 +38,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Effects");
 	USoundBase *HitSound;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Effects");
+	TSubclassOf<UCameraShake> HitShake;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Damage");
 	TSubclassOf<UDamageType> DamageType;
 	
