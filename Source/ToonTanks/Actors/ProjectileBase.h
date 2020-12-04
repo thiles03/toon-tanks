@@ -22,12 +22,16 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent *ProjectileMovement;
+
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent *ProjectileMesh;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Damage");
 	TSubclassOf<UDamageType> DamageType;
+
 	UPROPERTY(EditAnywhere, BluePrintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float MovementSpeed = 1300.f;
+	
 	UPROPERTY(EditAnywhere, BluePrintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
 	float Damage = 50.f;
 

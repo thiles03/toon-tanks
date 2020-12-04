@@ -15,10 +15,13 @@ class TOONTANKS_API ATankPawn : public ABasePawn
 public:
 	// Constructor
 	ATankPawn();
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+
 	virtual void HandleDestruction() override;
 
 protected:
@@ -28,21 +31,27 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent *SpringArm = nullptr;
+
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent *Camera = nullptr;
 
 	FVector MoveDirection;
+
 	FQuat RotationDirection;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))	
 	float MoveSpeed = 100.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float RotateSpeed = 100.f;
 
 	APlayerController *PlayerControllerRef;
 
 	void CalculateMoveInput(float Value);
+
 	void CalculateRotateInput(float Value);
 
 	void Move();
+	
 	void Rotate();
 };

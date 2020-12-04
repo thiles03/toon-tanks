@@ -15,23 +15,30 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
+
 	void PawnDestroyed();
+
 	virtual void HandleDestruction();
 
 protected:
 	void RotateTurret(FVector LookAtTarget);
+
 	void Fire();
 
 private:
 	//COMPONENTS
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UCapsuleComponent *CapsuleComponent = nullptr;
+
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent *BaseMesh = nullptr;
+
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent *TurretMesh = nullptr;
+
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent *ProjectileSpawnPoint = nullptr;
+	
 	//VARIABLES
 	UPROPERTY(EditAnywhere, BluePrintReadOnly, Category = "Projectile Type", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AProjectileBase> ProjectileClass;

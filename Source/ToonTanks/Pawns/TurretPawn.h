@@ -14,6 +14,7 @@ class TOONTANKS_API ATurretPawn : public ABasePawn
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 	virtual void HandleDestruction() override;
 
 protected:
@@ -22,12 +23,15 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	float FireRate = 2.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	float FireRange = 500.f;
 
 	FTimerHandle FireRateTimer;
+
 	ATankPawn *PlayerPawn;
 
 	void CheckFireCondition();
+	
 	float GetDistanceToPlayer();
 };
