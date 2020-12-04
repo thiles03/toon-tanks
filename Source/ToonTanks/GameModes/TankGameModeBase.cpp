@@ -9,22 +9,43 @@ void ATankGameModeBase::BeginPlay()
 {
     Super::BeginPlay();
 
-    TArray<AActor*> TurretActors;
-    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATurretPawn::StaticClass(), OUT TurretActors);
-    TargetTurrets = TurretActors.Num();
-
-    PlayerTank = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+    HandleGameStart();
 }
 
 void ATankGameModeBase::ActorDied(AActor *DeadActor)
 {
-    UE_LOG(LogTemp, Warning, TEXT("Pawn died"));
+    if (DeadActor == PlayerTank)
+    {
+        PlayerTank->HandleDestruction();
+        HandleGameOver(false);
+    }
+    else if (ATurretPawn *DestroyedTurret = Cast<ATurretPawn>(DeadActor))
+    {
+        DestroyedTurret->HandleDestruction();
+
+        if (--TargetTurrets == 0)
+        {
+            HandleGameOver(true);
+        }
+    }
 }
 
 void ATankGameModeBase::HandleGameStart()
 {
+    TargetTurrets = GetTargetTurretCount();
+    PlayerTank = Cast<ATankPawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+
+    GameStart();
 }
 
 void ATankGameModeBase::HandleGameOver(bool PlayerWon)
 {
+    GameOver(PlayerWon);
+}
+
+int32 ATankGameModeBase::GetTargetTurretCount()
+{
+    TArray<AActor*> TurretActors;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATurretPawn::StaticClass(), OUT TurretActors);
+    return TurretActors.Num();
 }
